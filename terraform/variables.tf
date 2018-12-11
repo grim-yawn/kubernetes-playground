@@ -2,6 +2,10 @@ variable "ansible_controller_machine_type" {
   default = "n1-standard-4"
 }
 
+variable "kubernetes_master_machine_type" {
+  default = "n1-standard-4"
+}
+
 variable "base_image" {
   default = "rhel-7-v20181113"
 }

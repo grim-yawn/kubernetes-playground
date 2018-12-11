@@ -1,0 +1,11 @@
+all:
+  hosts:
+    ansible-controller:
+      localhost:
+        vars:
+          ansible_connection: local
+          ansible_python_interpreter: "{{ ansible_playbook_python }}"
+  children:
+    openshift:
+      hosts:
+        ${kubernetes_master_fqdn}:
