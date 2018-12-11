@@ -27,3 +27,16 @@ resource "google_compute_firewall" "allow_network_egress" {
 
   destination_ranges = ["${var.subnetwork_cidr}"]
 }
+
+resource "google_compute_firewall" "allow_ssh_ansible_controller" {
+  name    = "allow-ssh-ansible-controller"
+  network = "${google_compute_network.kubernetes.name}"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+
+  target_tags   = ["ansible-controller"]
+  source_ranges = ["${var.trusted_ip_ranges}"]
+}

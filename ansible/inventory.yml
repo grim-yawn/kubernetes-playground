@@ -1,11 +1,9 @@
 all:
   hosts:
-    ansible-controller:
+    ansible_controller:
       localhost:
         vars:
           ansible_connection: local
           ansible_python_interpreter: "{{ ansible_playbook_python }}"
-  children:
-    openshift:
-      hosts:
-        ${kubernetes_master_fqdn}:
+    kube_single_node:
+      ansible_host: kubernetes-master.europe-west4-a.c.openshift-playground-222412.internal

@@ -1,1 +1,29 @@
----
+- hosts: ansible_controller
+
+  tasks:
+    - name: Install required packages
+      become: true
+      yum:
+        name:
+          - git
+          - python3-pip
+        state: present
+
+    - name: Update kubespray
+      git:
+        repo: https://github.com/kubernetes-sigs/kubespray
+        dest: /home/ansible_user/kubespray
+        version: v2.8.0
+
+    - name: Install pip packages for kubespray
+      become: true
+      pip:
+        requirements: /home/ansible_user/kubespray/requirements.txt
+
+    - name: Generate inventory
+      template:
+        src: templates/stage/{{ item }}
+        dest: stage
+      loop:
+        - group_vars/all.yml.j2
+        - inventory.yml.j2
