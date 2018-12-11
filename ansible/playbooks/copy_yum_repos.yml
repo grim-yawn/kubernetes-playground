@@ -1,0 +1,24 @@
+---
+- hosts: ansible-controller
+
+  tasks:
+    - name: Enable docker repos
+      yum_repository:
+        name: docker-ce-stable
+        description: Docker CE Stable - $basearch
+        file: docker-ce
+        enabled: true
+        gpgcheck: true
+        gpgkey: https://download.docker.com/linux/centos/gpg
+
+    - name: Enable additional kubernetes repos
+      yum_repository:
+        name: kubernetes
+        description: Kubernetes
+        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+        enabled: true
+        gpgcheck: 1
+        repo_gpgcheck: 1
+        gpgkey:
+          - https://packages.cloud.google.com/yum/doc/yum-key.gpg
+          - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg

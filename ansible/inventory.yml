@@ -1,7 +1,11 @@
+---
 all:
   hosts:
-    ansible_controller:
+    ansible-controller:
       ansible_connection: local
       ansible_python_interpreter: "{{ ansible_playbook_python }}"
-    kube_single_node:
-      ansible_host: kubernetes-master.europe-west4-a.c.openshift-playground-222412.internal
+  children:
+    kubernetes:
+      hosts:
+        master:
+          ansible_host: kubernetes-master.europe-west4-a.c.openshift-playground-222412.internal

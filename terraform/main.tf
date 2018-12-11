@@ -48,5 +48,5 @@ resource "google_compute_instance" "kubernetes_master" {
     network = "${google_compute_network.kubernetes.name}"
   }
 
-  tags = ["kubernetes-master"]
+  tags = ["kubernetes-master", "kubernetes-worker"]
 }

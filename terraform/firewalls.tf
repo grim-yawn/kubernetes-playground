@@ -48,7 +48,7 @@ resource "google_compute_firewall" "allow_ssh_ansible_controller" {
 
   allow {
     protocol = "tcp"
-    ports    = ["22"]
+    ports    = [22]
   }
 
   source_ranges = ["${var.trusted_ip_ranges}"]
@@ -61,9 +61,80 @@ resource "google_compute_firewall" "allow_ssh_from_controller_to_kubernetes" {
 
   allow {
     protocol = "tcp"
-    ports    = ["22"]
+    ports    = [22]
   }
 
-  source_tags = ["ansible-controller"]
+  source_ranges = []
+  source_tags   = ["ansible-controller"]
+  target_tags   = ["kubernetes-master", "kubernetes-worker"]
+}
+
+resource "google_compute_firewall" "allow_access_to_apiserver" {
+  name    = "allow-access-to-apiserver"
+  network = "${google_compute_network.kubernetes.name}"
+
+  allow {
+    protocol = "tcp"
+    ports    = [6443]
+  }
+
+  source_ranges = ["${var.trusted_ip_ranges}"]
+  source_tags   = ["kubernetes-master", "kubernetes-worker"]
+
   target_tags = ["kubernetes-master"]
+}
+
+resource "google_compute_firewall" "allow_access_to_master_from_master" {
+  name    = "allow-access-to-master-from-master"
+  network = "${google_compute_network.kubernetes.name}"
+
+  allow {
+    protocol = "tcp"
+    ports    = [2379, 2380]
+  }
+
+  allow {
+    protocol = "tcp"
+    ports    = [10250]
+  }
+
+  allow {
+    protocol = "tcp"
+    ports    = [10251]
+  }
+
+  allow {
+    protocol = "tcp"
+    ports    = [10252]
+  }
+
+  source_ranges = []
+  source_tags   = ["kubernetes-master"]
+  target_tags   = ["kubernetes-master"]
+}
+
+resource "google_compute_firewall" "allow_acess_to_worker_kubelet_api" {
+  name    = "allow-access-to-worker-kubelet-api"
+  network = "${google_compute_network.kubernetes.name}"
+
+  allow {
+    protocol = "tcp"
+    ports    = [10250]
+  }
+
+  source_ranges = []
+  source_tags   = ["kubernetes-master", "kubernetes-worker"]
+  target_tags   = ["kubernetes-worker"]
+}
+
+resource "google_compute_firewall" "allow_access_to_worker_services" {
+  name    = "allow-access-to-worker-services"
+  network = "${google_compute_network.kubernetes.name}"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["30000-32767"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
 }
