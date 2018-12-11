@@ -3,15 +3,18 @@
 
   tasks:
     - name: Enable docker repos
+      become: true
       yum_repository:
         name: docker-ce-stable
         description: Docker CE Stable - $basearch
+        baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
         file: docker-ce
         enabled: true
         gpgcheck: true
         gpgkey: https://download.docker.com/linux/centos/gpg
 
     - name: Enable additional kubernetes repos
+      become: true
       yum_repository:
         name: kubernetes
         description: Kubernetes
@@ -22,3 +25,47 @@
         gpgkey:
           - https://packages.cloud.google.com/yum/doc/yum-key.gpg
           - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+    - name: Install nginx
+      become: true
+      yum:
+        name: nginx
+        state: present
+
+    - name: Enable and start nginx
+      become: true
+      systemd:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Install utils for yum repos
+      become: true
+      yum:
+        name:
+          - yum-utils
+          - createrepo
+        state: present
+
+    - name: Sync packages
+      become: true
+      command: reposync -lgm --repoid={{ item }} --download_path=/usr/share/nginx/html/repos
+      loop: "{{ yum_repos }}"
+
+    - name: Create repos for packages
+      become: true
+      command: createrepo /var/www/html/repos/{{ item }} -o /usr/share/nginx/html/repos/{{ item }}
+      loop: "{{ yum_repos }}"
+
+    - name: Set permissions for packages
+      become: true
+      file:
+        recurse: true
+        path: /usr/share/nginx/html/repos
+        mode: o+r
+
+    - name: Reload nginx
+      become: true
+      systemd:
+        name: nginx
+        state: reloaded

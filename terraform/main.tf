@@ -25,7 +25,7 @@ resource "google_compute_instance" "ansible_controller" {
     network = "${google_compute_network.kubernetes.name}"
   }
 
-  tags = ["ansible-controller"]
+  tags = ["ansible-controller", "yum-repo", "docker-registry"]
 }
 
 resource "google_compute_instance" "kubernetes_master" {

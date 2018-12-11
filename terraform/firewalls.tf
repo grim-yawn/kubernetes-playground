@@ -138,3 +138,17 @@ resource "google_compute_firewall" "allow_access_to_worker_services" {
 
   source_ranges = ["0.0.0.0/0"]
 }
+
+resource "google_compute_firewall" "allow_access_from_kubernetes_to_yum_repos" {
+  name    = "allow-access-from-kubernetes-to-yum-repos"
+  network = "${google_compute_network.kubernetes.name}"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80"]
+  }
+
+  target_tags   = ["yum-repo"]
+  source_ranges = ["${var.trusted_ip_ranges}"]
+  source_tags   = ["kubernetes-master", "kubernetes-worker"]
+}
