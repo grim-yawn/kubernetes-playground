@@ -9,8 +9,17 @@ resource "null_resource" "copy_ansible" {
     host        = "${google_compute_instance.ansible_controller.network_interface.0.access_config.0.nat_ip}"
   }
 
+  provisioner "file" {
+    source      = "~/.ssh/id_rsa_ansible_user"
+    destination = "~/.ssh/id_rsa_ansible_user"
+  }
+
   provisioner "remote-exec" {
-    inline = [" [[ -d ~/ansible ]] && rm -rf ~/ansible"]
+    inline = ["chmod 600 ~/.ssh/id_rsa_ansible_user"]
+  }
+
+  provisioner "remote-exec" {
+    inline = ["rm -rf ~/ansible"]
   }
 
   provisioner "file" {

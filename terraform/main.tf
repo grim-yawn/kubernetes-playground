@@ -10,7 +10,7 @@ resource "google_compute_instance" "ansible_controller" {
   machine_type = "${var.ansible_controller_machine_type}"
 
   allow_stopping_for_update = true
-  metadata_startup_script   = "sudo yum -y install ansible"
+  metadata_startup_script   = "yum -y install python2-pip && pip install ansible==2.6"
 
   boot_disk {
     initialize_params {

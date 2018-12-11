@@ -1,8 +1,9 @@
 ---
 all:
-  kube_single_node:
-    ansible_host: "{{ hostvars['kube_single_node'].ansible_host }}"
-    etcd_member_name: etcd1
+  hosts:
+    kube_single_node:
+      ansible_host: "{{ hostvars['kube_single_node'].ansible_host }}"
+      etcd_member_name: etcd1
   children:
     k8s-cluster:
       children:

@@ -6,8 +6,15 @@
       yum:
         name:
           - git
-          - python3-pip
+          - docker
         state: present
+
+    - name: Enable docker
+      become: true
+      service:
+        name: docker
+        state: started
+        enabled: true
 
     - name: Update kubespray
       git:
@@ -20,10 +27,18 @@
       pip:
         requirements: /home/ansible_user/kubespray/requirements.txt
 
+    - name: Create dirs for inventory
+      file:
+        path: /home/ansible_user/kubespray/inventory/{{ item }}
+        state: directory
+      loop:
+        - stage
+        - stage/group_vars
+
     - name: Generate inventory
       template:
         src: templates/stage/{{ item }}
-        dest: stage
+        dest: /home/ansible_user/kubespray/inventory/stage/{{ item[:-3] }}
       loop:
         - group_vars/all.yml.j2
         - inventory.yml.j2
