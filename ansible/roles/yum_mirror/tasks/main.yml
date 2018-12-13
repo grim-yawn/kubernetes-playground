@@ -24,9 +24,11 @@
     mode: o+r
 
 - name: Install nginx
+  become: true
   include_role:
     name: jdauphant.nginx
   vars:
+    ansible_become: true
     nginx_sites:
       repos:
         - listen 80 default_server

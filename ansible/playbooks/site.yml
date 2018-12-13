@@ -6,3 +6,4 @@
       yum_mirror_repos_list: []
 
     - role: kubespray
+      kubespray_single_master: kubernetes-master.europe-west4-a.c.openshift-playground-222412.internal
