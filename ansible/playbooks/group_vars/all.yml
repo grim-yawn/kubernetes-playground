@@ -1,0 +1,5 @@
+---
+yum_repos:
+  - epel
+
+yum_repo_ip: "{{ hostvars['ansible-controller'].ansible_host }}"

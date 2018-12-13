@@ -8,12 +8,12 @@
 
 - name: Sync packages
   become: true
-  command: reposync -lgm --repoid={{ item }} --download_path={{ yum_mirror_save_dir }}
+  command: reposync -lnm --repoid={{ item }} --download_path={{ yum_mirror_save_dir }}
   loop: "{{ yum_mirror_repos_list }}"
 
 - name: Create repos for packages
   become: true
-  command: createrepo {{ yum_mirror_save_dir }}/{{ item }} -o {{ yum_mirror_save_dir }}/{{ item }}
+  command: createrepo --update {{ yum_mirror_save_dir }}/{{ item }} -o {{ yum_mirror_save_dir }}/{{ item }}
   loop: "{{ yum_mirror_repos_list }}"
 
 - name: Set permissions for packages
@@ -24,7 +24,6 @@
     mode: o+r
 
 - name: Install nginx
-  become: true
   include_role:
     name: jdauphant.nginx
   vars:

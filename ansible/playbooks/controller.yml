@@ -1,0 +1,9 @@
+---
+- hosts: ansible-controller
+
+  roles:
+    - role: yum_mirror
+      yum_mirror_repos_list: "{{ yum_repos }}"
+
+    - role: kubespray
+      kubespray_single_master: "{{ hostvars['kube-master'].ansible_host }}"
