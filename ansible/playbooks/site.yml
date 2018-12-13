@@ -1,0 +1,8 @@
+---
+- hosts: ansible-controller
+
+  roles:
+    - role: yum_mirror
+      yum_mirror_repos_list: []
+
+    - role: kubespray

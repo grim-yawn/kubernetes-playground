@@ -2,7 +2,7 @@
 all:
   hosts:
     node1:
-      ansible_host: "{{ hostvars['kube-master'].ansible_host }}"
+      ansible_host: "{{ kube_single_master }}"
       etcd_member_name: etcd1
   children:
     k8s-cluster:

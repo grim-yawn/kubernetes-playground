@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Ivan Kosolapov
+  description: Role to create yum repositories private mirror with nginx
+
+  license: MIT
+
+  min_ansible_version: 2.6
+
+  platforms:
+    - name: RHEL
+      versions:
+        - 7
+
+  galaxy_tags: []
+
+dependencies:
+  - jdauphant.nginx

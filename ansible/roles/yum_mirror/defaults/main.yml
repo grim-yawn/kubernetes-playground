@@ -1,0 +1,6 @@
+---
+# List of yum repos to create local private mirrors
+yum_mirror_repos_list: "{{ yum_mirror_repos_list }}"
+
+# Dir in which rpms will be persisted
+yum_mirror_save_dir: "/var/yum_mirror/repos"

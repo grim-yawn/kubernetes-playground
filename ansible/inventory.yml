@@ -7,5 +7,5 @@ all:
   children:
     kubernetes:
       hosts:
-        master:
+        kube-master:
           ansible_host: kubernetes-master.europe-west4-a.c.openshift-playground-222412.internal

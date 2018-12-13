@@ -1,0 +1,34 @@
+---
+- name: Install yum utils and createrepo
+  become: true
+  yum:
+    name:
+      - yum-utils
+      - createrepo
+
+- name: Sync packages
+  become: true
+  command: reposync -lgm --repoid={{ item }} --download_path={{ yum_mirror_save_dir }}
+  loop: "{{ yum_mirror_repos_list }}"
+
+- name: Create repos for packages
+  become: true
+  command: createrepo {{ yum_mirror_save_dir }}/{{ item }} -o {{ yum_mirror_save_dir }}/{{ item }}
+  loop: "{{ yum_mirror_repos_list }}"
+
+- name: Set permissions for packages
+  become: true
+  file:
+    recurse: true
+    path: "{{ yum_mirror_save_dir }}"
+    mode: o+r
+
+- name: Install nginx
+  include_role:
+    name: jdauphant.nginx
+  vars:
+    nginx_sites:
+      repos:
+        - listen 80 default_server
+        - server_name _
+        - root "{{ yum_mirror_save_dir }}"

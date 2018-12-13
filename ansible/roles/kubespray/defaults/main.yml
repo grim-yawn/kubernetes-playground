@@ -1,0 +1,3 @@
+---
+# DNS name of single master kube node
+kube_single_master: "{{ kube_single_master }}"
