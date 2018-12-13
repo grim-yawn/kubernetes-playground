@@ -1,0 +1,21 @@
+## Change this to use another Kubernetes version, e.g. a current beta release
+kube_version: v1.12.3
+
+# kubernetes image repo define
+kube_image_repo: "gcr.io/google-containers"
+
+# Choose network plugin (cilium, calico, contiv, weave or flannel)
+# Can also be set to 'cloud', which lets the cloud provider setup appropriate routing
+kube_network_plugin: calico
+
+# Make a copy of kubeconfig on the host that runs Ansible in {{ '{{' }} inventory_dir {{ '{{' }}/artifacts
+kubeconfig_localhost: true
+
+# Download kubectl onto the host that runs Ansible in {{ '{{' }} bin_dir {{ '{{' }}
+kubectl_localhost: true
+
+# Enable rbac
+rbac_enabled: true
+
+# Enable anon auth
+kube_api_anonymous_auth: true

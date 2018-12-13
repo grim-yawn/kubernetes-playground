@@ -1,6 +1,2 @@
 ---
-yum_repo_ip: ansible-controller.europe-west4-a.c.openshift-playground-222412.internal
-
-yum_repos:
-  - docker-ce-stable
-  - kubernetes
+http_proxy: ansible-controller.europe-west4-a.c.openshift-playground-222412.internal

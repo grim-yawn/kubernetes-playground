@@ -1,0 +1,9 @@
+---
+nginx_sites:
+  default:
+    - server_name ~^(www\.)?(?<domain>.+)$;
+    - access_log /var/log/nginx/proxy.access.log main;
+    - error_log /var/log/nginx/proxy.error.log crit;
+    - listen 10.255.1.13:8080;
+    - resolver 8.8.8.8;
+    - location / { proxy_pass http://$domain; proxy_redirect off; proxy_set_header Host $host; }

@@ -13,4 +13,6 @@
 # Crash log files
 crash.log
 
+# Ansible
+ansible/imported_roles
 
