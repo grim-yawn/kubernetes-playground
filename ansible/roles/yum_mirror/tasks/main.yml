@@ -1,4 +1,9 @@
 ---
+- name: Disable SELinux
+  become: true
+  selinux:
+    state: disabled
+
 - name: Install yum utils and createrepo
   become: true
   yum:
@@ -13,7 +18,10 @@
 
 - name: Create repos for packages
   become: true
-  command: createrepo --update {{ yum_mirror_save_dir }}/{{ item }} -o {{ yum_mirror_save_dir }}/{{ item }}
+  command: >-
+    createrepo --update --workers={{ ansible_processor_vcpus }}
+    -o {{ yum_mirror_save_dir }}/{{ item }}
+    {{ yum_mirror_save_dir }}/{{ item }}
   loop: "{{ yum_mirror_repos_list }}"
 
 - name: Set permissions for packages

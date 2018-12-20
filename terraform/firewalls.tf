@@ -149,6 +149,6 @@ resource "google_compute_firewall" "allow_access_from_kubernetes_to_yum_repos" {
   }
 
   target_tags   = ["yum-repo"]
-  source_ranges = ["${var.trusted_ip_ranges}"]
+  source_ranges = []
   source_tags   = ["kubernetes-master", "kubernetes-worker"]
 }

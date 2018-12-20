@@ -19,3 +19,7 @@ rbac_enabled: true
 
 # Enable anon auth
 kube_api_anonymous_auth: true
+
+download_run_once: true
+
+download_localhost: true

@@ -40,6 +40,7 @@
       notify: yum clean metadata
 
     - name: Enable private mirrors
+      become: true
       yum_repository:
         name: "{{ item }}"
         description: "{{ item }}"

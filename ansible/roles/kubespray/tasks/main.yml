@@ -20,12 +20,12 @@
   file:
     path: '/home/ansible_user/kubespray/inventory/stage/{{ item.path }}'
     state: directory
-  with_filetree: 'stage'
+  with_filetree: '../templates/stage'
   when: item.state == 'directory'
 
 - name: Ensure inventory files are populated from templates
   template:
     src: '{{ item.src }}'
     dest: '/home/ansible_user/kubespray/inventory/stage/{{ item.path }}'
-  with_filetree: 'stage'
+  with_filetree: '../templates/stage'
   when: item.state == 'file'
