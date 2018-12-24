@@ -3,19 +3,13 @@
 ## Installation
 ```bash
 cd terraform
-```
 
-```bash
 terraform apply
 ```
 
 ```bash
-# Remove from known hosts
-ssh-keygen -R $(terraform output ansible_controller_external_ip)
+cd ../ansible
 
-ssh -A ansible_user@$(terraform output ansible_controller_external_ip) -i ~/.ssh/id_rsa_ansible_user
-
-cd ansible
-
-ansible-playbook playbooks/prepare.yml
+ansible-playbook -v playbooks/controller.yml
+ansible-playbook -v playbooks/cluster.yml
 ```
