@@ -6,7 +6,4 @@ yum_repos:
   - epel
   - rhui-rhel-7-server-rhui-rpms
 
-docker_images:
-  - registry: ""
-    name: ""
-    tag: ""
+docker_images: []

@@ -152,3 +152,17 @@ resource "google_compute_firewall" "allow_access_from_kubernetes_to_yum_repos" {
   source_ranges = []
   source_tags   = ["kubernetes-master", "kubernetes-worker"]
 }
+
+resource "google_compute_firewall" "allow_access_from_kubernetes_to_docker_registry" {
+  name    = "allow-access-from-kubernetes-to-docker-registry"
+  network = "${google_compute_network.kubernetes.name}"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["5000"]
+  }
+
+  target_tags   = ["docker-registry"]
+  source_ranges = []
+  source_tags   = ["kubernetes-master", "kubernetes-worker"]
+}
