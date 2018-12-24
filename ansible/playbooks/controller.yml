@@ -11,6 +11,5 @@
     - role: kubespray
       kubespray_master: "{{ hostvars['kube-master'].ansible_host }}"
       kubespray_worker: "{{ hostvars['kube-worker'].ansible_host }}"
-      kubespray_insecure_registries:
-        - "{{ docker_registry_ip }}"
+      kubespray_insecure_registry: "{{ docker_registry_ip }}"
       kubespray_docker_images: "{{ docker_images }}"

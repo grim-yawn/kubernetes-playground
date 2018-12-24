@@ -1,5 +1,5 @@
 ---
 kubespray_master: "{{ kubespray_master }}"
 kubespray_worker: "{{ kubespray_worker }}"
-kubespray_insecure_registries: "{{ kubespray_insecure_registries }}"
+kubespray_insecure_registry: "{{ kubespray_insecure_registry }}"
 kubespray_docker_images: "{{ kubespray_docker_images }}"
