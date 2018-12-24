@@ -1,5 +1,5 @@
 ---
+yum_repo_ip: 10.164.0.2
 yum_repos:
   - epel
-
-yum_repo_ip: 10.164.0.2
+  - rhui-rhel-7-server-rhui-rpms
