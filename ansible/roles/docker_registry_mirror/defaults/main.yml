@@ -1,0 +1,2 @@
+---
+docker_registry_mirror_images: "{{ docker_registry_mirror_images }}"

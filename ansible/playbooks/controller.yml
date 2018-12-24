@@ -5,6 +5,12 @@
     - role: yum_mirror
       yum_mirror_repos_list: "{{ yum_repos }}"
 
+    - role: docker_registry_mirror
+      docker_registry_mirror_images: "{{ docker_images }}"
+
     - role: kubespray
       kubespray_master: "{{ hostvars['kube-master'].ansible_host }}"
       kubespray_worker: "{{ hostvars['kube-worker'].ansible_host }}"
+      kubespray_insecure_registries:
+        - "{{ docker_registry_ip }}"
+      kubespray_docker_images: "{{ docker_images }}"

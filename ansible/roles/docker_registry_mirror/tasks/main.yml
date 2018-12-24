@@ -1,0 +1,43 @@
+---
+- name: Install docker
+  yum:
+    name: docker
+    state: present
+
+- name: Enable and start docker
+  systemd:
+    name: docker
+    state: started
+    enabled: true
+
+- name: Pull image with private registry
+  docker_image:
+    name: registry:2
+
+- name: Run docker registry
+  docker_container:
+    name: registry
+    state: present
+    image: registry:2
+    restart_policy: always
+    published_ports:
+      - "5000:5000"
+
+- name: Add insecure registries
+  template:
+    src: etc/docker/daemon.json.j2
+    dest: /etc/docker/daemon.json
+
+- name: Restart docker
+  systemd:
+    name: docker
+    state: restarted
+    daemon_reload: true
+
+- name: Pull and retag images
+  docker_image:
+    name: "{{ item.registry }}/{{ item.name }}"
+    repository: "127.0.0.1:5000/{{ item.name }}"
+    tag: "{{ item.tag }}"
+    push: true
+  loop: "{{ docker_registry_mirror_images }}"

@@ -1,5 +1,12 @@
 ---
-yum_repo_ip: 10.164.0.2
+yum_repo_ip: 35.204.109.172
+docker_registry_ip: 35.204.109.172
+
 yum_repos:
   - epel
   - rhui-rhel-7-server-rhui-rpms
+
+docker_images:
+  - registry: ""
+    name: ""
+    tag: ""
