@@ -6,4 +6,5 @@
       yum_mirror_repos_list: "{{ yum_repos }}"
 
     - role: kubespray
-      kubespray_single_master: "{{ hostvars['kube-master'].ansible_host }}"
+      kubespray_master: "{{ hostvars['kube-master'].ansible_host }}"
+      kubespray_worker: "{{ hostvars['kube-worker'].ansible_host }}"

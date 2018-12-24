@@ -8,3 +8,5 @@ all:
       hosts:
         kube-master:
           ansible_host: 10.164.0.3
+        kube-worker:
+          ansible_host: 35.204.114.177

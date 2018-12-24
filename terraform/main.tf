@@ -48,5 +48,28 @@ resource "google_compute_instance" "kubernetes_master" {
     network = "${google_compute_network.kubernetes.name}"
   }
 
-  tags = ["kubernetes-master", "kubernetes-worker"]
+  tags = ["kubernetes-master"]
+}
+
+resource "google_compute_instance" "kubernetes_worker" {
+  name = "kubernetes-worker"
+
+  machine_type = "${var.kubernetes_master_machine_type}"
+
+  allow_stopping_for_update = true
+
+  boot_disk {
+    initialize_params {
+      image = "${var.base_image}"
+      size  = 146
+    }
+  }
+
+  network_interface {
+    access_config {}
+
+    network = "${google_compute_network.kubernetes.name}"
+  }
+
+  tags = ["kubernetes-worker"]
 }

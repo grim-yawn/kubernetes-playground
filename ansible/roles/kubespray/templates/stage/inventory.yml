@@ -1,18 +1,21 @@
 ---
 all:
   hosts:
-    node1:
-      ansible_host: "{{ kubespray_single_master }}"
+    master:
+      ansible_host: "{{ kubespray_master }}"
       etcd_member_name: etcd1
+    worker:
+      ansible_host: "{{ kubespray_worker }}"
   children:
     k8s-cluster:
       children:
         kube-master:
           hosts:
-            node1:
+            master:
         etcd:
           hosts:
-            node1:
+            master:
         kube-node:
           hosts:
-            node1:
+            master:
+            worker:
