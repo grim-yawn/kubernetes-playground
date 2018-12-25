@@ -15,4 +15,4 @@ crash.log
 
 # Ansible
 ansible/imported_roles
-
+ansible/ssh-bastion.conf

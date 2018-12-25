@@ -1,11 +1,27 @@
 ---
-- hosts: cluster
+- hosts: ansible-controller
+
+  roles:
+    - role: kubespray-defaults
+
+    - role: bastion-ssh-config
+
+    - role: yum_mirror
+      yum_mirror_repos_list: "{{ yum_repos }}"
+
+    - role: docker_registry_mirror
+      docker_registry_mirror_images: "{{ docker_images }}"
+
+- hosts: k8s-cluster
 
   handlers:
     - name: yum clean metadata
       command: yum clean metadata
       args:
         warn: no
+
+  roles:
+    - { role: kubespray-defaults}
 
   tasks:
     - name: Disable stock repos

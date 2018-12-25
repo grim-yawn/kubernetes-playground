@@ -1,0 +1,18 @@
+master ansible_host=10.164.0.3 etcd_member_name=etcd1
+worker ansible_host=10.164.0.4
+
+[bastion]
+ansible-controller ansible_host=35.204.92.26 ansible_user=ansible_user
+
+[kube-master]
+master
+
+[etcd]
+master
+
+[kube-node]
+worker
+
+[k8s-cluster:children]
+kube-master
+kube-node

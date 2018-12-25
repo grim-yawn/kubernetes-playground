@@ -2,6 +2,9 @@
 yum_repo_ip: 10.164.0.2
 docker_registry_ip: 10.164.0.2
 
+docker_insecure_registries:
+  - "{{ docker_registry_ip }}"
+
 yum_repos:
   - epel
   - rhui-rhel-7-server-rhui-rpms

@@ -1,9 +1,0 @@
----
-- hosts: ansible-controller
-
-  roles:
-    - role: yum_mirror
-      yum_mirror_repos_list: "{{ yum_repos }}"
-
-    - role: docker_registry_mirror
-      docker_registry_mirror_images: "{{ docker_images }}"
