@@ -5,12 +5,6 @@
     name: docker
     state: present
 
-- name: Install docker-py
-  become: true
-  pip:
-    name: docker-py
-    state: present
-
 - name: Enable and start docker
   become: true
   systemd:
@@ -38,13 +32,7 @@
   template:
     src: etc/docker/daemon.json.j2
     dest: /etc/docker/daemon.json
-
-- name: Restart docker
-  become: true
-  systemd:
-    name: docker
-    state: restarted
-    daemon_reload: true
+  notify: restart docker
 
 - name: Pull and retag images
   become: true

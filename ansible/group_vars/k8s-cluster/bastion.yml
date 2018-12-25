@@ -1,8 +1,5 @@
 ansible_ssh_common_args: >-
-  {% if ansible_ssh_common_args is defined %}
-  {{ ansible_ssh_common_args }}
-  {% else %}
-  -o ProxyCommand='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -W %h:%p
+  -o ProxyCommand='ssh -o UserKnownHostsFile=/dev/null
+  -o StrictHostKeyChecking=no -W %h:%p
   {{ hostvars['ansible-controller']['ansible_user'] }}@{{ hostvars['ansible-controller']['ansible_host'] }}
-   -i {{ ansible_ssh_private_key_file }}'
-  {% endif %}
+  -i ~/.ssh/id_rsa_ansible_user'
