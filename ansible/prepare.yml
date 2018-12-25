@@ -2,10 +2,6 @@
 - hosts: ansible-controller
 
   roles:
-    - role: kubespray-defaults
-
-    - role: bastion-ssh-config
-
     - role: yum_mirror
       yum_mirror_repos_list: "{{ yum_repos }}"
 
@@ -19,9 +15,6 @@
       command: yum clean metadata
       args:
         warn: no
-
-  roles:
-    - { role: kubespray-defaults}
 
   tasks:
     - name: Disable stock repos
