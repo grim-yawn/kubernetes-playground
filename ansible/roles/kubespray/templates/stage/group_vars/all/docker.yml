@@ -1,3 +1,0 @@
----
-docker_insecure_registries:
-  - "{{ kubespray_insecure_registry }}"

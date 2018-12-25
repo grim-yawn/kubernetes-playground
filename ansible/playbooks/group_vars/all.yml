@@ -1,6 +1,6 @@
 ---
-yum_repo_ip: 35.204.109.172
-docker_registry_ip: 35.204.109.172
+yum_repo_ip: 10.164.0.2
+docker_registry_ip: 10.164.0.2
 
 yum_repos:
   - epel
