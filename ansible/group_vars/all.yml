@@ -2,11 +2,13 @@
 yum_repo_ip: 10.164.0.2
 docker_registry_ip: 10.164.0.2
 
-docker_insecure_registries:
-  - "{{ docker_registry_ip }}"
+yum_mirror_repos_list:
+  - baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
+    gpgkey: https://download.docker.com/linux/centos/gpg
+    name: docker-ce
 
-yum_repos:
-  - epel
-  - rhui-rhel-7-server-rhui-rpms
+  - baseurl: https://yum.dockerproject.org/repo/main/centos/7
+    gpgkey: https://yum.dockerproject.org/gpg
+    name: docker-engine
 
 docker_images: []

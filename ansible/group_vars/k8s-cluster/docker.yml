@@ -1,0 +1,9 @@
+---
+docker_insecure_registries:
+  - '{{ docker_registry_ip }}'
+
+docker_rh_repo_base_url: 'http://{{ yum_repo_ip }}/docker-ce'
+docker_rh_repo_gpgkey: 'http://{{ yum_repo_ip }}/docker-ce/gpg'
+
+dockerproject_rh_repo_base_url: 'http://{{ yum_repo_ip }}/docker-engine'
+dockerproject_rh_repo_gpgkey: 'http://{{ yum_repo_ip }}/docker-engine/gpg'

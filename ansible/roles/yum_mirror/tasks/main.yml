@@ -4,6 +4,15 @@
   selinux:
     state: disabled
 
+- name: Enable mirrored repos
+  become: true
+  yum_repository:
+    name: '{{ item.name }}'
+    description: '{{ item.name }}'
+    baseurl: '{{ item.baseurl }}'
+    gpgkey: '{{ item.gpgkey }}'
+  loop: '{{ yum_mirror_repos_list }}'
+
 - name: Install yum utils and createrepo
   become: true
   yum:
@@ -13,22 +22,29 @@
 
 - name: Sync packages
   become: true
-  command: reposync -lnm --repoid={{ item }} --download_path={{ yum_mirror_save_dir }}
+  command: reposync -lnm --repoid={{ item.name }} --download_path={{ yum_mirror_save_dir }}
   loop: "{{ yum_mirror_repos_list }}"
 
 - name: Create repos for packages
   become: true
   command: >-
     createrepo --update --workers={{ ansible_processor_vcpus }}
-    -o {{ yum_mirror_save_dir }}/{{ item }}
-    {{ yum_mirror_save_dir }}/{{ item }}
-  loop: "{{ yum_mirror_repos_list }}"
+    -o {{ yum_mirror_save_dir }}/{{ item.name }}
+    {{ yum_mirror_save_dir }}/{{ item.name }}
+  loop: '{{ yum_mirror_repos_list }}'
+
+- name: Download keys
+  become: true
+  get_url:
+    url: '{{ item.gpgkey }}'
+    dest: '{{ yum_mirror_save_dir }}/{{ item.name }}/gpg'
+  loop: '{{ yum_mirror_repos_list }}'
 
 - name: Set permissions for packages
   become: true
   file:
     recurse: true
-    path: "{{ yum_mirror_save_dir }}"
+    path: '{{ yum_mirror_save_dir }}'
     mode: o+r
 
 - name: Install nginx
@@ -40,4 +56,4 @@
       repos:
         - listen 80 default_server
         - server_name _
-        - root "{{ yum_mirror_save_dir }}"
+        - root '{{ yum_mirror_save_dir }}'

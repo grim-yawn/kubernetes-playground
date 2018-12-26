@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d3c93b20474423fcb1d4debf3339a17ab25e612f859b4584fa127c4a1deb9e8b"
+            "sha256": "81c002974afe8321b4446edf87e4e2b7e70bd77ce76bfd7726ba8cc04d596e6a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -144,6 +144,14 @@
             ],
             "version": "==0.4.0"
         },
+        "hvac": {
+            "hashes": [
+                "sha256:11f7858126d859d0f6262b1aed60f8312e2a6a6700fd430be3ff4d40786dabda",
+                "sha256:531d339916ba565eb594aa4fbcc0a3c98a94ac9fc169fbf3afaf8ca7fe02f53e"
+            ],
+            "index": "pypi",
+            "version": "==0.7.1"
+        },
         "idna": {
             "hashes": [
                 "sha256:c357b3f628cf53ae2c4c05627ecc484553142ca23264e593d327bcde5e9c3407",
@@ -156,6 +164,7 @@
                 "sha256:74c935a1b8bb9a3947c50a54766a969d4846290e1e788ea44c1392163723c3bd",
                 "sha256:f84be1bb0040caca4cea721fcbbbbd61f9be9464ca236387158b0feea01914a4"
             ],
+            "index": "pypi",
             "version": "==2.10"
         },
         "markupsafe": {
@@ -191,12 +200,28 @@
             ],
             "version": "==1.1.0"
         },
+        "netaddr": {
+            "hashes": [
+                "sha256:38aeec7cdd035081d3a4c306394b19d677623bf76fa0913f6695127c7753aefd",
+                "sha256:56b3558bd71f3f6999e4c52e349f38660e54a7a8a9943335f73dfc96883e08ca"
+            ],
+            "index": "pypi",
+            "version": "==0.7.19"
+        },
         "paramiko": {
             "hashes": [
                 "sha256:3c16b2bfb4c0d810b24c40155dbfd113c0521e7e6ee593d704e84b4c658a1f3b",
                 "sha256:a8975a7df3560c9f1e2b43dc54ebd40fd00a7017392ca5445ce7df409f900fcb"
             ],
             "version": "==2.4.2"
+        },
+        "pbr": {
+            "hashes": [
+                "sha256:f59d71442f9ece3dffc17bc36575768e1ee9967756e6b6535f0ee1f0054c3d68",
+                "sha256:f6d5b23f226a2ba58e14e49aa3b1bfaf814d0199144b95d78458212444de1387"
+            ],
+            "index": "pypi",
+            "version": "==5.1.1"
         },
         "pyasn1": {
             "hashes": [
