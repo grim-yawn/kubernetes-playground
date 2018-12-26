@@ -48,7 +48,7 @@ resource "google_compute_firewall" "allow_ssh_ansible_controller" {
 
   allow {
     protocol = "tcp"
-    ports    = [22]
+    ports    = [22, 80, 5000]
   }
 
   source_ranges = ["${var.trusted_ip_ranges}"]
